@@ -23,7 +23,7 @@ function getModel(): string {
   }
 }
 
-function extractJson<T = any>(text: string): T {
+function extractJson<T = unknown>(text: string): T {
   try {
     return JSON.parse(text) as T;
   } catch {
@@ -97,7 +97,7 @@ export async function generatePrompts(params: {
     ? 'You are a master visual storyteller for tasteful adult content. Follow safety rules. '
     : 'You are a master visual storyteller for cinematic content. ';
 
-  const prompt = `${sys}Generate 3 video prompt variations as a JSON array. Each item is an object with keys \"title\" and \"prompt\".\nRules:\n- 80–120 words each (max 140).\n- Weave camera angle and movement into narrative.\n- Combine elements cohesively.\n\nCriteria:\n- Main Scene: \"${scene}\"\n- Visual Style: \"${style}\"\n- Protagonist Action: \"${protagonistAction}\"\n- Camera Angle: \"${cameraAngle}\"\n- Camera Movement: \"${cameraMovement}\"\n- Camera/Device: \"${cameraDevice ?? ''}\"\n- Lighting: \"${lighting}\"`;
+  const prompt = `${sys}Generate 3 video prompt variations as a JSON array. Each item is an object with keys "title" and "prompt".\nRules:\n- 80–120 words each (max 140).\n- Weave camera angle and movement into narrative.\n- Combine elements cohesively.\n\nCriteria:\n- Main Scene: "${scene}"\n- Visual Style: "${style}"\n- Protagonist Action: "${protagonistAction}"\n- Camera Angle: "${cameraAngle}"\n- Camera Movement: "${cameraMovement}"\n- Camera/Device: "${cameraDevice ?? ''}"\n- Lighting: "${lighting}"`;
 
   const text = await generate({ prompt });
   const json = extractJson<VideoPrompt[]>(text);

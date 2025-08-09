@@ -14,7 +14,7 @@ function getApiKey(): string | null {
   }
 }
 
-function extractJson<T = any>(text: string): T {
+function extractJson<T = unknown>(text: string): T {
   try {
     return JSON.parse(text) as T;
   } catch {

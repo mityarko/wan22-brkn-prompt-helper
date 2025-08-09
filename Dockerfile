@@ -4,9 +4,12 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+# Update npm
+RUN npm install -g npm@11.5.2
+
 # Install dependencies
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 
 # Copy source and build
 COPY . .
