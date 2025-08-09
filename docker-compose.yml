@@ -4,3 +4,4 @@ services:
     ports:
       - "127.0.0.1:8228:80"
     restart: unless-stopped
+    container_name: brkn-prompt-helper
